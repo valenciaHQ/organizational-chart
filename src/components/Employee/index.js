@@ -2,7 +2,7 @@ import React from "react";
 import { Container, PhotoWrapper, Photo, Information, Entry } from "./styled";
 
 export default props => {
-  console.log(props.data);
+  console.log("Employee: ", props);
   const { first, last, department, office } = props.data;
 
   return (

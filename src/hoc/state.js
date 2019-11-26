@@ -1,5 +1,6 @@
 export default {
   loading: false,
   error: "",
-  data: []
+  manager: {},
+  employees: []
 };

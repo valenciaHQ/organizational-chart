@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import COLOR from "../../constants/colors";
 
 export const Container = styled.div`
@@ -27,9 +27,23 @@ export const Information = styled.div`
   width: 100%;
 `;
 
-export const Entry = styled.div(props => ({
-  display: "flex",
-  flexDirection: "row",
-  height: "40px",
-  padding: "10px"
-}));
+export const Entry = styled.div`
+  flex-direction: column;
+  height: 40px;
+  padding: 10px;
+  font-size: 12px;
+
+  ${({ isName }) =>
+    isName &&
+    css`
+      padding-top: 20px;
+      font-size: 26px;
+    `}
+
+  ${({ isInfo }) =>
+    isInfo &&
+    css`
+      padding-top: 0px;
+      font-size: 14px;
+    `}
+`;

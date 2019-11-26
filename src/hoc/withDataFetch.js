@@ -1,23 +1,57 @@
-import React, { Component } from "react";
+import React, { useEffect, useReducer } from "react";
+import axios from "axios";
+import { BASE_PATH } from "../constants/APIroutes";
 
-export default (endpoint, WrappedComponent) => {
-  return class extends Component {
-    constructor(props) {
-      super(props);
-      this.state = { data: [] };
-    }
+import reducer from "./reducer";
+import initialState from "./state";
+import ACTIONS from "./actions";
 
-    componentDidMount() {
-      fetch(endpoint)
-        .then(response => response.json())
-        .then(data => {
-          this.setState({ data });
-        })
-        .catch(err => console.log(err.message));
-    }
+export default (managerId, WrappedComponent) => props => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { manager, employees } = state;
 
-    render() {
-      return <WrappedComponent data={this.state.data} {...this.props} />;
-    }
-  };
+  useEffect(() => {
+    dispatch({ type: ACTIONS.FETCH_IN_PROGRESS });
+    //Getting manager profile
+    console.log("Fetching manager with id: ", managerId);
+    axios
+      .get(`${BASE_PATH}?id=${managerId}`)
+      .then(response => {
+        dispatch({ type: ACTIONS.MANAGER_DATA, payload: response.data });
+      })
+      .catch(error => {
+        console.error(error);
+        dispatch({
+          type: ACTIONS.FETCH_ERROR,
+          payload: "There was an error while fetching data"
+        });
+      });
+
+    //Getting employees managed by
+    console.log("Fetching employees with id: ", managerId);
+    axios
+      .get(`${BASE_PATH}?manager=${managerId}`)
+      .then(response => {
+        dispatch({
+          type: ACTIONS.EMPLOYEES_MANAGED_BY,
+          payload: response.data
+        });
+      })
+      .catch(error => {
+        console.error(error);
+        dispatch({
+          type: ACTIONS.FETCH_ERROR,
+          payload: "There was an error while fetching data"
+        });
+      });
+  }, []);
+
+  return (
+    <WrappedComponent
+      managerId={managerId}
+      manager={manager}
+      employees={employees}
+      {...props}
+    />
+  );
 };

@@ -1,45 +1,34 @@
-import React, { useEffect, useReducer } from "react";
-import axios from "axios";
+import React from "react";
 
 import Employee from "../Employee";
-import { Container, Employees, Title } from "./styled";
-import { BASE_PATH } from "../../constants/APIroutes";
+import withDataFetch from "../../hoc/withDataFetch";
+import { Container, LevelContainer, Title, Employees } from "./styled";
 
-import reducer from "./reducer";
-import initialState from "./state";
-import ACTIONS from "./actions";
-
-export default () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const { data } = state;
-
-  useEffect(() => {
-    dispatch({ type: ACTIONS.FETCH_IN_PROGRESS });
-    axios
-      .get(`${BASE_PATH}?manager=0`)
-      .then(response => {
-        dispatch({ type: ACTIONS.FETCH_SUCCESS, payload: response.data });
-      })
-      .catch(error => {
-        console.error(error);
-        dispatch({
-          type: ACTIONS.FETCH_ERROR,
-          payload: "There was an error while fetching data"
-        });
-      });
-  }, []);
-
-  const currentLevel = 0;
-
+const Table = ({ employees, manager, managerId }) => {
   return (
     <Container>
-      <Title>Manager level {currentLevel}</Title>
-      <Employees>
-        {data &&
-          data.map((employee, index) => {
-            return <Employee key={index} data={employee} />;
-          })}
-      </Employees>
+      <LevelContainer>
+        <Title>Manager level {managerId}</Title>
+        <Employee
+          data={
+            managerId === 0 && employees.length > 0 ? employees[0] : manager
+          }
+        />
+        {managerId !== 0 && (
+          <>
+            <Title>Manages</Title>
+            <Employees>
+              {employees &&
+                employees.map((employee, index) => {
+                  console.log("Employee map: ", employee);
+                  return <Employee key={index} data={employee} />;
+                })}
+            </Employees>
+          </>
+        )}
+      </LevelContainer>
     </Container>
   );
 };
+
+export default withDataFetch(0, Table);

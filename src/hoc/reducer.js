@@ -1,16 +1,22 @@
 import ACTIONS from "./actions";
 
 export default (state, action) => {
+  console.log("ACTION: ", action);
   switch (action.type) {
     case ACTIONS.FETCH_IN_PROGRESS:
       return {
         ...state,
         loading: true
       };
-    case ACTIONS.FETCH_SUCCESS:
+    case ACTIONS.MANAGER_DATA:
       return {
         ...state,
-        data: action.payload
+        manager: action.payload
+      };
+    case ACTIONS.EMPLOYEES_MANAGED_BY:
+      return {
+        ...state,
+        employees: action.payload
       };
     case ACTIONS.FETCH_ERROR:
       return {

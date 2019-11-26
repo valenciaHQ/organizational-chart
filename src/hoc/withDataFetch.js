@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-export default function withDataFetching(endpoint, WrappedComponent) {
+export default (endpoint, WrappedComponent) => {
   return class extends Component {
     constructor(props) {
       super(props);
@@ -20,4 +20,4 @@ export default function withDataFetching(endpoint, WrappedComponent) {
       return <WrappedComponent data={this.state.data} {...this.props} />;
     }
   };
-}
+};

@@ -1,5 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import COLOR from "./constants/colors";
+
+import EmployeesTable from "./components/EmployeesTable";
 
 const Page = styled.div`
   display: flex;
@@ -13,25 +16,27 @@ const NavBar = styled.div`
   display: flex;
   flex-direction: row;
   height: 10%;
-  background-color: black;
+  background-color: ${COLOR.WHITE};
+  box-shadow: 0px 0px 33px -9px rgba(0, 0, 0, 0.75);
 `;
 
-const Table = styled.div`
+const Header = styled.div`
   display: flex;
   flex-direction: row;
-  height: 80%;
-  background-color: red;
+  height: 10%;
+  background-color: ${COLOR.BLUE_MARGERITE};
 `;
 
 const Footer = styled.footer`
   display: flex;
   flex-direction: row;
   height: 10%;
-  background-color: black;
+  background-color: ${COLOR.BLUE_MARGERITE};
 `;
 
 const App = () => (
   <Page>
+    <Header />
     <NavBar />
     <EmployeesTable />
     <Footer />

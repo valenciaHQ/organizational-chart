@@ -27,19 +27,11 @@ const Header = styled.div`
   background-color: ${COLOR.BLUE_MARGERITE};
 `;
 
-const Footer = styled.footer`
-  display: flex;
-  flex-direction: row;
-  height: 10%;
-  background-color: ${COLOR.BLUE_MARGERITE};
-`;
-
 const App = () => (
   <Page>
     <Header />
     <NavBar />
     <EmployeesTable />
-    <Footer />
   </Page>
 );
 

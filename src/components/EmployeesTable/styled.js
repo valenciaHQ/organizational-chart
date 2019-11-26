@@ -3,7 +3,7 @@ import COLOR from "../../constants/colors";
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   height: 80%;
   width: 100%;
   padding: 40px 0 20px 40px;
@@ -13,15 +13,9 @@ export const Container = styled.div`
 export const LevelContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 200px;
-`;
-
-export const Employees = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`;
-
-export const Title = styled.h4`
-  width: 100%;
+  width: 300px;
+  height: auto;
+  min-width: 300px;
+  padding: 10px;
+  background-color: yellowgreen;
 `;

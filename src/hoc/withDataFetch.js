@@ -1,49 +1,36 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { BASE_PATH } from "../constants/APIroutes";
 
-import reducer from "./reducer";
-import initialState from "./state";
-import ACTIONS from "./actions";
-
 export default (managerId, WrappedComponent) => props => {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const { manager, employees } = state;
+  const [manager, setManager] = useState({});
+  const [employees, setEmployees] = useState([]);
+  const [error, setError] = useState([]);
 
   useEffect(() => {
-    dispatch({ type: ACTIONS.FETCH_IN_PROGRESS });
     //Getting manager profile
     console.log("Fetching manager with id: ", managerId);
     axios
       .get(`${BASE_PATH}?id=${managerId}`)
-      .then(response => {
-        dispatch({ type: ACTIONS.MANAGER_DATA, payload: response.data });
-      })
-      .catch(error => {
-        console.error(error);
-        dispatch({
-          type: ACTIONS.FETCH_ERROR,
-          payload: "There was an error while fetching data"
-        });
-      });
+      .then(response => setManager(response.data))
+      .catch(error =>
+        setError(
+          "There was an error while fetching manager with id: ",
+          managerId
+        )
+      );
 
     //Getting employees managed by
     console.log("Fetching employees with id: ", managerId);
     axios
       .get(`${BASE_PATH}?manager=${managerId}`)
-      .then(response => {
-        dispatch({
-          type: ACTIONS.EMPLOYEES_MANAGED_BY,
-          payload: response.data
-        });
-      })
-      .catch(error => {
-        console.error(error);
-        dispatch({
-          type: ACTIONS.FETCH_ERROR,
-          payload: "There was an error while fetching data"
-        });
-      });
+      .then(response => setEmployees(response.data))
+      .catch(error =>
+        setError(
+          "There was an error while fetching employees with id: ",
+          managerId
+        )
+      );
   }, []);
 
   return (

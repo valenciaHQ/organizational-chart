@@ -2,11 +2,10 @@ import React from "react";
 import { Container, PhotoWrapper, Photo, Information, Entry } from "./styled";
 
 export default props => {
-  console.log("Employee: ", props);
   const { first, last, department, office } = props.data;
 
   return (
-    <Container>
+    <Container withMargin={props.withMargin}>
       <PhotoWrapper>
         <Photo src="https://via.placeholder.com/75x75.png" />
       </PhotoWrapper>

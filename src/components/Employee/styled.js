@@ -6,7 +6,15 @@ export const Container = styled.div`
   flex-direction: row;
   height: 100px;
   width: 100%;
+  border-radius: 20px;
   background-color: ${COLOR.WHITE};
+
+  ${({ withMargin }) =>
+    withMargin &&
+    css`
+      margin-top: 20px;
+      margin-bottom: 20px;
+    `}
 `;
 
 export const PhotoWrapper = styled.div`
@@ -37,13 +45,13 @@ export const Entry = styled.div`
     isName &&
     css`
       padding-top: 20px;
-      font-size: 26px;
+      font-size: 18px;
     `}
 
   ${({ isInfo }) =>
     isInfo &&
     css`
       padding-top: 0px;
-      font-size: 14px;
+      font-size: 10px;
     `}
 `;

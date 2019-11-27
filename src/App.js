@@ -10,11 +10,13 @@ const Page = styled.div`
   font-size: 1.5em;
   margin: 0;
   height: 100vh;
+  width: auto;
 `;
 
 const NavBar = styled.div`
   display: flex;
   flex-direction: row;
+  width: auto;
   height: 10%;
   background-color: ${COLOR.WHITE};
   box-shadow: 0px 0px 33px -9px rgba(0, 0, 0, 0.75);

@@ -4,21 +4,18 @@ import { connect } from "react-redux";
 import Level from "../Level";
 import Tooltip from "./Tooltip";
 
-import withDataFetch from "../../hoc/withDataFetch";
 import { Container, LevelContainer } from "./styled";
 
 const EmployeesTable = props => {
-  const { managers } = props;
-
+  const { levels } = props;
   return (
     <Container>
       <Tooltip />
-      {managers &&
-        managers.map((manager, index) => {
-          const EnhancedLevel = withDataFetch(manager, Level);
+      {levels.length > 0 &&
+        levels.map((level, index) => {
           return (
             <LevelContainer key={index}>
-              <EnhancedLevel />
+              <Level data={level} />
             </LevelContainer>
           );
         })}
@@ -27,7 +24,7 @@ const EmployeesTable = props => {
 };
 
 const mapStateToProps = state => ({
-  managers: state.managers
+  levels: state.levels.data
 });
 
 export default connect(mapStateToProps, null)(EmployeesTable);

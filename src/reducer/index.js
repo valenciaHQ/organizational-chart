@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import managers from "./managers";
+import levels from "./levels";
 import tooltip from "./tooltip";
 
-export default combineReducers({ managers, tooltip });
+export default combineReducers({ levels, tooltip });

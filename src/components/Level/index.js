@@ -1,29 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { addManager } from "../../actions/managers";
+import { addLevel } from "../../actions/levels";
 
 import Employee from "../Employee";
 import { Wrapper, Title, Employees, Icon } from "./styled";
 
 const Level = props => {
-  const { managerId, manager, employees, managers, addManager } = props;
+  const { level, manager, employees } = props.data;
 
-  console.log("Manager id: ", managerId);
-  console.log("Employees: ", employees);
+  useEffect(() => {
+    if (level === 0) props.addLevel(level);
+  }, []);
 
-  const managerInfo =
-    managerId === 0 && employees && employees.length > 0
-      ? employees[0]
-      : manager;
-
+  const managerInfo = "Lala";
   return (
     <Wrapper>
-      <Title>Manager level {managerId}</Title>
+      <Title>Manager level {level}</Title>
+      {/*
       <Employee
         data={managerInfo}
         subComponent={
           managerId === managers[managers.length - 1] && (
-            <Icon onClick={() => addManager()} />
+            <Icon onClick={() => addLevel(managerId + 1)} />
           )
         }
       />
@@ -37,16 +35,13 @@ const Level = props => {
           </Employees>
         </>
       )}
+      */}
     </Wrapper>
   );
 };
 
-const mapStateToProps = state => ({
-  managers: state.managers
-});
-
 const mapDispatchToProps = dispatch => ({
-  addManager: manager => dispatch(addManager(manager))
+  addLevel: level => dispatch(addLevel(level))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Level);
+export default connect(null, mapDispatchToProps)(Level);

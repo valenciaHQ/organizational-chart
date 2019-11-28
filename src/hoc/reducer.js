@@ -1,7 +1,6 @@
 import ACTIONS from "./actions";
 
 export default (state, action) => {
-  console.log("ACTION: ", action);
   switch (action.type) {
     case ACTIONS.FETCH_IN_PROGRESS:
       return {

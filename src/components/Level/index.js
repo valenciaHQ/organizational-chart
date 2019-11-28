@@ -3,33 +3,41 @@ import { connect } from "react-redux";
 import { addManager } from "../../actions/managers";
 
 import Employee from "../Employee";
-import { Title, Employees, NextManager, Icon } from "./styled";
+import { Wrapper, Title, Employees, Icon } from "./styled";
 
 const Level = props => {
   const { managerId, manager, employees, managers, addManager } = props;
+
+  console.log("Manager id: ", managerId);
+  console.log("Employees: ", employees);
+
+  const managerInfo =
+    managerId === 0 && employees && employees.length > 0
+      ? employees[0]
+      : manager;
+
   return (
-    <>
+    <Wrapper>
       <Title>Manager level {managerId}</Title>
       <Employee
-        data={managerId === 0 && employees.length > 0 ? employees[0] : manager}
+        data={managerInfo}
+        subComponent={
+          managerId === managers[managers.length - 1] && (
+            <Icon onClick={() => addManager()} />
+          )
+        }
       />
-      {managerId === managers[managers.length - 1] && (
-        <NextManager>
-          <Icon onClick={() => addManager()} />
-        </NextManager>
-      )}
-      {managerId !== 0 && (
+      {managerId !== 0 && employees.length > 0 && (
         <>
           <Title>Manages</Title>
           <Employees>
-            {employees &&
-              employees.map((employee, index) => {
-                return <Employee key={index} data={employee} withMargin />;
-              })}
+            {employees.map((employee, index) => {
+              return <Employee key={index} data={employee} />;
+            })}
           </Employees>
         </>
       )}
-    </>
+    </Wrapper>
   );
 };
 

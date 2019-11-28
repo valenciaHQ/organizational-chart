@@ -24,7 +24,6 @@ export const Dismiss = styled.div`
   width: 60px;
   font-size: 12px;
   text-align: center;
-  border-bottom: 1px solid black;
   &:hover {
     cursor: pointer;
   }

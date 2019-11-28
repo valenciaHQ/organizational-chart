@@ -6,7 +6,7 @@ export const Container = styled.div`
   flex-direction: row;
   height: 80%;
   width: auto;
-  padding: 40px 0 20px 40px;
+  padding: 40px 20px 20px 40px;
   overflow: auto;
   background-color: ${COLOR.LINK_WATER};
 `;

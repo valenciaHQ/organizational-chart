@@ -9,10 +9,9 @@ export default (managerId, WrappedComponent) => props => {
 
   useEffect(() => {
     //Getting manager profile
-    console.log("Fetching manager with id: ", managerId);
     axios
       .get(`${BASE_PATH}?id=${managerId}`)
-      .then(response => setManager(response.data))
+      .then(response => setManager(response.data[0] ? response.data[0] : {}))
       .catch(error =>
         setError(
           "There was an error while fetching manager with id: ",
@@ -21,7 +20,6 @@ export default (managerId, WrappedComponent) => props => {
       );
 
     //Getting employees managed by
-    console.log("Fetching employees with id: ", managerId);
     axios
       .get(`${BASE_PATH}?manager=${managerId}`)
       .then(response => setEmployees(response.data))

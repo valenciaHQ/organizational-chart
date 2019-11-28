@@ -8,13 +8,7 @@ export const Container = styled.div`
   width: 100%;
   border-radius: 20px;
   background-color: ${COLOR.WHITE};
-
-  ${({ withMargin }) =>
-    withMargin &&
-    css`
-      margin-top: 20px;
-      margin-bottom: 20px;
-    `}
+  margin: 20px 0 20px 0;
 `;
 
 export const PhotoWrapper = styled.div`

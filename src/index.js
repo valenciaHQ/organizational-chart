@@ -8,7 +8,6 @@ import { GlobalStyle } from "./styled";
 import * as serviceWorker from "./serviceWorker";
 import store from "./reducer/store";
 
-console.log("Store: ", store);
 ReactDOM.render(
   <>
     <Provider store={store}>

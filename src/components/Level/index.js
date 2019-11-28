@@ -6,26 +6,30 @@ import Employee from "../Employee";
 import { Wrapper, Title, Employees, Icon } from "./styled";
 
 const Level = props => {
-  const { level, manager, employees } = props.data;
+  const { data, lastLevel, isLoading, addLevel } = props;
+  const { level, manager, employees } = data;
 
+  console.log("Data: ", props.data);
   useEffect(() => {
-    if (level === 0) props.addLevel(level);
+    if (level === 0) {
+      props.addLevel(level);
+    }
   }, []);
 
-  const managerInfo = "Lala";
-  return (
+  return isLoading ? (
+    <div>loading...</div>
+  ) : (
     <Wrapper>
       <Title>Manager level {level}</Title>
-      {/*
+
       <Employee
-        data={managerInfo}
+        data={level === 0 ? employees[0] : manager}
         subComponent={
-          managerId === managers[managers.length - 1] && (
-            <Icon onClick={() => addLevel(managerId + 1)} />
-          )
+          level === lastLevel && <Icon onClick={() => addLevel(level + 1)} />
         }
       />
-      {managerId !== 0 && employees.length > 0 && (
+
+      {level !== 0 && employees.length > 0 && (
         <>
           <Title>Manages</Title>
           <Employees>
@@ -35,13 +39,17 @@ const Level = props => {
           </Employees>
         </>
       )}
-      */}
     </Wrapper>
   );
 };
+
+const mapStateToProps = ({ levels }) => ({
+  isLoading: levels.isLoading,
+  lastLevel: levels.data[levels.data.length - 1].level
+});
 
 const mapDispatchToProps = dispatch => ({
   addLevel: level => dispatch(addLevel(level))
 });
 
-export default connect(null, mapDispatchToProps)(Level);
+export default connect(mapStateToProps, mapDispatchToProps)(Level);

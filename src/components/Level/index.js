@@ -1,55 +1,58 @@
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { addLevel } from "../../actions/levels";
-
-import Employee from "../Employee";
 import { Wrapper, Title, Employees, Icon } from "./styled";
 
-const Level = props => {
-  const { data, lastLevel, isLoading, addLevel } = props;
-  const { level, manager, employees } = data;
+import { useDispatch, useSelector } from "react-redux";
+import { fillLevel } from "../../actions/levels";
 
-  console.log("Data: ", props.data);
+import Employee from "../Employee";
+
+export default ({ levelId, onAdd }) => {
+  const levelData = useSelector(state => {
+    const data = state.levels.data;
+    return data && data.size > 0 && data.get(levelId);
+  });
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    if (level === 0) {
-      props.addLevel(level);
-    }
-  }, []);
+    dispatch(fillLevel(levelId));
+  }, [dispatch, levelId]);
 
-  return isLoading ? (
-    <div>loading...</div>
-  ) : (
+  console.log("levelData", levelData);
+  console.log("No levelData", !levelData);
+  console.log("levelData.isLoading", levelData && levelData.isLoading);
+  console.log("levelData.isLastLevel", levelData && levelData.isLastLevel);
+
+  return (
     <Wrapper>
-      <Title>Manager level {level}</Title>
-
-      <Employee
-        data={level === 0 ? employees[0] : manager}
-        subComponent={
-          level === lastLevel && <Icon onClick={() => addLevel(level + 1)} />
-        }
-      />
-
-      {level !== 0 && employees.length > 0 && (
+      {levelData && !levelData.isLoading ? (
         <>
-          <Title>Manages</Title>
-          <Employees>
-            {employees.map((employee, index) => {
-              return <Employee key={index} data={employee} />;
-            })}
-          </Employees>
+          <Title>Manager level {levelId}</Title>
+          <Employee
+            data={
+              levelId === 0 && levelData.employees
+                ? levelData.employees
+                : levelData.manager
+            }
+            subComponent={
+              levelData.isLastLevel && (
+                <Icon onClick={() => onAdd(levelId + 1)} />
+              )
+            }
+          />
+          {levelId !== 0 && levelData.length > 0 && (
+            <>
+              <Title>Manages</Title>
+              <Employees>
+                {levelData.employees.map((employee, index) => {
+                  return <Employee key={index} data={employee} />;
+                })}
+              </Employees>
+            </>
+          )}
         </>
+      ) : (
+        <p>Loading</p>
       )}
     </Wrapper>
   );
 };
-
-const mapStateToProps = ({ levels }) => ({
-  isLoading: levels.isLoading,
-  lastLevel: levels.data[levels.data.length - 1].level
-});
-
-const mapDispatchToProps = dispatch => ({
-  addLevel: level => dispatch(addLevel(level))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Level);

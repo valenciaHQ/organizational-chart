@@ -11,6 +11,11 @@ export const Container = styled.div`
   margin: 20px 0 20px 0;
 `;
 
+export const NextWrapper = styled.div`
+  align-self: center;
+  margin-right: 5px;
+`;
+
 export const PhotoWrapper = styled.div`
   display: flex;
   flex-direction: column;

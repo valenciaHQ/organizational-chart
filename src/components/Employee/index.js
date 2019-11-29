@@ -1,11 +1,12 @@
 import React from "react";
-import { Container, PhotoWrapper, Photo, Information, Entry } from "./styled";
-
-import styled from "styled-components";
-const NextWrapper = styled.div`
-  align-self: center;
-  margin-right: 5px;
-`;
+import {
+  Container,
+  PhotoWrapper,
+  Photo,
+  Information,
+  Entry,
+  NextWrapper
+} from "./styled";
 
 export default props => {
   const { first, last, department, office } = props.data;

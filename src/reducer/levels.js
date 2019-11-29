@@ -1,41 +1,57 @@
-import { FETCH_REQUEST, ADD_LEVEL } from "../actions/levels";
+import { FETCH_REQUEST, FILL_LEVEL } from "../actions/levels";
+
+const initLevel = {
+  isLoading: true,
+  error: null
+};
 
 const initialState = {
-  isLoading: true,
-  error: null,
-  data: [{ level: 0, manager: {}, employees: [] }]
+  data: new Map().set(0, initLevel)
 };
 
 const levels = (state = initialState, action) => {
-  console.log(action);
   switch (action.type) {
     case FETCH_REQUEST: {
+      const levels = state.data;
+      levels.set(action.payload, {
+        isLoading: true,
+        error: null
+      });
       return {
-        ...state,
-        isLoading: true
+        ...state
       };
     }
-    case ADD_LEVEL: {
+    case FILL_LEVEL: {
       const newLevel = {
         level: action.payload.level,
         manager: action.payload.manager[0],
         employees: action.payload.employees
       };
-      const level0 = state.data[0];
-      if (level0.employees.length === 0) {
-        const newData = [newLevel];
+      const levels = state.data;
+      if (newLevel.level === 0) {
+        levels.set(newLevel.level, {
+          isLoading: false,
+          isLastLevel: true,
+          error: null,
+          employees: newLevel.employees[0],
+          manager: {}
+        });
         return {
           ...state,
-          isLoading: false,
-          data: newData
+          isLoading: false
         };
       } else {
-        const oldData = state.data;
-        const data = [...oldData, newLevel];
+        const isLastLevel = newLevel.level === state.data.size - 1;
+        levels.set(newLevel.level, {
+          isLoading: false,
+          error: null,
+          employees: newLevel.employees,
+          manager: newLevel.manager,
+          isLastLevel
+        });
         return {
           ...state,
-          isLoading: false,
-          data
+          isLoading: false
         };
       }
     }

@@ -1,9 +1,12 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import colors from "../../constants/colors";
+
+export const Loading = styled.h5`
+  border: 1px solid black;
+`;
 
 export const Wrapper = styled.div`
   width: 100%;
-  height: 100%;
 `;
 
 export const Employees = styled.div`

@@ -8,7 +8,7 @@ const Tooltip = props =>
   props.showTooltip && (
     <Wrapper>
       <Greet>Greetings!</Greet>
-      <Text>Click the arrow to see the next manager level! </Text>
+      <Text>Click any arrow to start playing!</Text>
       <Dismiss onClick={props.hide}>Close me</Dismiss>
     </Wrapper>
   );

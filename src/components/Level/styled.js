@@ -28,16 +28,23 @@ export const NextManager = styled.div`
   left: 290px;
 `;
 
-export const Icon = styled.div`
+export const Arrow = styled.div`
   border: solid ${colors.BLUE_MARGERITE};
   border-width: 0 3px 3px 0;
-  max-width: 5px;
   display: inline-block;
   padding: 3px;
-  transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
 
   &:hover {
     cursor: pointer;
   }
+`;
+
+export const DownArrow = styled(Arrow)`
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+`;
+
+export const RightArrow = styled(Arrow)`
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
 `;

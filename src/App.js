@@ -1,39 +1,32 @@
 import React from "react";
 import styled from "styled-components";
-import COLOR from "./constants/colors";
 
-import EmployeesTable from "./components/EmployeesTable";
+import Header from "./components/Header";
+import TabbedPanel from "./components/TabbedPannel";
 
 const Page = styled.div`
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
-  font-size: 1.5em;
-  margin: 0;
   height: 100vh;
   width: auto;
+  font-size: 1.5em;
+  margin: 0;
 `;
 
-const NavBar = styled.div`
+const Body = styled.div`
   display: flex;
   flex-direction: row;
   width: auto;
-  height: 10%;
-  background-color: ${COLOR.WHITE};
-  box-shadow: 0px 0px 33px -9px rgba(0, 0, 0, 0.75);
-`;
-
-const Header = styled.div`
-  display: flex;
-  flex-direction: row;
-  height: 10%;
-  background-color: ${COLOR.BLUE_MARGERITE};
+  overflow: visible;
+  height: auto;
 `;
 
 const App = () => (
   <Page>
     <Header />
-    <NavBar />
-    <EmployeesTable />
+    <Body>
+      <TabbedPanel />
+    </Body>
   </Page>
 );
 

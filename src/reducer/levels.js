@@ -1,7 +1,8 @@
-import { FETCH_REQUEST, FILL_LEVEL } from "../actions/levels";
+import { FETCH_REQUEST, INIT_LEVEL, GET_EMPLOYEES } from "../actions/levels";
 
 const initLevel = {
-  isLoading: true,
+  loadingManager: true,
+  loadingEmployees: false,
   error: null
 };
 
@@ -13,27 +14,25 @@ const levels = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_REQUEST: {
       const levels = state.data;
-      levels.set(action.payload, {
-        isLoading: true,
+      const oldLevel = levels.get(action.payload.level);
+      levels.set(action.payload.level, {
+        ...oldLevel,
+        loadingManager: action.payload.loadingManager,
+        loadingEmployees: action.payload.loadingEmployees,
         error: null
       });
       return {
         ...state
       };
     }
-    case FILL_LEVEL: {
-      const newLevel = {
-        level: action.payload.level,
-        manager: action.payload.manager[0],
-        employees: action.payload.employees
-      };
+    case INIT_LEVEL: {
       const levels = state.data;
-      if (newLevel.level === 0) {
-        levels.set(newLevel.level, {
-          isLoading: false,
-          isLastLevel: true,
+      if (action.payload.level === 0) {
+        levels.set(action.payload.level, {
+          loadingManager: false,
+          loadingEmployees: false,
           error: null,
-          employees: newLevel.employees[0],
+          employees: action.payload.employees[0],
           manager: {}
         });
         return {
@@ -41,19 +40,32 @@ const levels = (state = initialState, action) => {
           isLoading: false
         };
       } else {
-        const isLastLevel = newLevel.level === state.data.size - 1;
-        levels.set(newLevel.level, {
-          isLoading: false,
+        levels.set(action.payload.level, {
+          loadingManager: false,
+          loadingEmployees: false,
           error: null,
-          employees: newLevel.employees,
-          manager: newLevel.manager,
-          isLastLevel
+          manager: action.payload.manager
         });
         return {
           ...state,
           isLoading: false
         };
       }
+    }
+    case GET_EMPLOYEES: {
+      const levels = state.data;
+      const oldLevel = levels.get(action.payload.level);
+      levels.set(action.payload.level, {
+        ...oldLevel,
+        loadingManager: false,
+        loadingEmployees: false,
+        error: null,
+        employees: action.payload.employees
+      });
+      return {
+        ...state,
+        isLoading: false
+      };
     }
     default:
       return state;

@@ -5,28 +5,22 @@ import Level from "../Level";
 import Tooltip from "./Tooltip";
 
 import { Container, LevelContainer } from "./styled";
+const INITIAL_LEVEL = 0;
 
-const EmployeesTable = props => {
-  const [levels, setLevels] = useState([
-    <LevelContainer key={0}>
-      <Level levelId={0} onAdd={levelId => handleAddLevel(levelId)} />
-    </LevelContainer>
-  ]);
-
-  const handleAddLevel = levelId => {
-    const newLevels = [
-      ...levels,
-      <LevelContainer key={levelId}>
-        <Level levelId={levelId} onAdd={levelId => handleAddLevel(levelId)} />
-      </LevelContainer>
-    ];
-    setLevels(newLevels);
-  };
+const EmployeesTable = () => {
+  const [levels, setLevels] = useState([INITIAL_LEVEL]);
+  const handleAddLevel = () => setLevels([...levels, levels.length]);
 
   return (
     <Container>
       <Tooltip />
-      {levels}
+      {levels.map(level => {
+        return (
+          <LevelContainer key={level}>
+            <Level levelId={level} onAdd={() => handleAddLevel()} />
+          </LevelContainer>
+        );
+      })}
     </Container>
   );
 };

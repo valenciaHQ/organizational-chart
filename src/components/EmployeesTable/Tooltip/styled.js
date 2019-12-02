@@ -19,12 +19,13 @@ export const Text = styled.div`
 
 export const Dismiss = styled.div`
   position: relative;
-  left: 150px;
+  left: 60px;
   margin-top: 8px;
   width: 60px;
   font-size: 12px;
   text-align: center;
   &:hover {
     cursor: pointer;
+    border-bottom: 1px solid black;
   }
 `;

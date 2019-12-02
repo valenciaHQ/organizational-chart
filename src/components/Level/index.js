@@ -1,45 +1,50 @@
 import React, { useEffect } from "react";
-import { Wrapper, Title, Employees, Icon } from "./styled";
-
 import { useDispatch, useSelector } from "react-redux";
-import { fillLevel } from "../../actions/levels";
+import { initLevel, getEmployees } from "../../actions/levels";
 
 import Employee from "../Employee";
+import Alert from "../Alert";
+
+import { Wrapper, Title, Employees, RightArrow, DownArrow } from "./styled";
 
 export default ({ levelId, onAdd }) => {
   const levelData = useSelector(state => {
     const data = state.levels.data;
     return data && data.size > 0 && data.get(levelId);
   });
+  const isLastLevel = useSelector(state => {
+    const data = state.levels.data;
+    return data && data.size - 1 === levelId;
+  });
+
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fillLevel(levelId));
-  }, [dispatch, levelId]);
+  const isValidEmployees = () =>
+    levelId !== 0 && !levelData.loadingEmployees && levelData.employees;
 
-  console.log("levelData", levelData);
-  console.log("No levelData", !levelData);
-  console.log("levelData.isLoading", levelData && levelData.isLoading);
-  console.log("levelData.isLastLevel", levelData && levelData.isLastLevel);
+  useEffect(() => {
+    dispatch(initLevel(levelId));
+  }, [dispatch, levelId]);
 
   return (
     <Wrapper>
-      {levelData && !levelData.isLoading ? (
+      {levelData && !levelData.loadingManager ? (
         <>
           <Title>Manager level {levelId}</Title>
           <Employee
             data={
               levelId === 0 && levelData.employees
                 ? levelData.employees
-                : levelData.manager
+                : levelData.manager[0]
             }
-            subComponent={
-              levelData.isLastLevel && (
-                <Icon onClick={() => onAdd(levelId + 1)} />
+            rightArrow={isLastLevel && <RightArrow onClick={() => onAdd()} />}
+            downArrow={
+              levelId !== 0 && (
+                <DownArrow onClick={() => dispatch(getEmployees(levelId))} />
               )
             }
           />
-          {levelId !== 0 && levelData.length > 0 && (
+          {isValidEmployees() && levelData.employees.length > 0 && (
             <>
               <Title>Manages</Title>
               <Employees>
@@ -48,6 +53,11 @@ export default ({ levelId, onAdd }) => {
                 })}
               </Employees>
             </>
+          )}
+          {isValidEmployees() && levelData.employees.length === 0 && (
+            <Alert
+              message={`We are sorry, ${levelData.manager.first} has not employees in charge`}
+            />
           )}
         </>
       ) : (

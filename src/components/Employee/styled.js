@@ -3,7 +3,7 @@ import COLOR from "../../constants/colors";
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   height: 100px;
   width: 100%;
   border-radius: 20px;
@@ -11,7 +11,14 @@ export const Container = styled.div`
   margin: 20px 0 20px 0;
 `;
 
-export const NextWrapper = styled.div`
+export const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: ${props => props.height};
+  justify-content: ${props => props.centered && "center"};
+`;
+
+export const RightArrowWrapper = styled.div`
   align-self: center;
   margin-right: 5px;
 `;

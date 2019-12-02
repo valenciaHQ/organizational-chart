@@ -1,29 +1,34 @@
 import React from "react";
 import {
   Container,
+  Row,
   PhotoWrapper,
   Photo,
   Information,
   Entry,
-  NextWrapper
+  RightArrowWrapper,
+  DownArrowWrapper
 } from "./styled";
 
-export default props => {
-  const { first, last, department, office } = props.data;
+export default ({ data, rightArrow, downArrow }) => {
+  const { first, last, department, office } = data;
   return (
     <Container>
-      <PhotoWrapper>
-        <Photo src="https://via.placeholder.com/75x75.png" />
-      </PhotoWrapper>
-      <Information>
-        <Entry isName>
-          {first} {last}
-        </Entry>
-        <Entry isInfo>
-          Department {department} Office {office}
-        </Entry>
-      </Information>
-      {props.subComponent && <NextWrapper>{props.subComponent}</NextWrapper>}
+      <Row height={"85px"}>
+        <PhotoWrapper>
+          <Photo src="https://via.placeholder.com/75x75.png" />
+        </PhotoWrapper>
+        <Information>
+          <Entry isName>
+            {first} {last}
+          </Entry>
+          <Entry isInfo>
+            Department {department} Office {office}
+          </Entry>
+        </Information>
+        {rightArrow && <RightArrowWrapper>{rightArrow}</RightArrowWrapper>}
+      </Row>
+      {downArrow && <Row centered>{downArrow}</Row>}
     </Container>
   );
 };

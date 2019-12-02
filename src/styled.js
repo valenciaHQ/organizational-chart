@@ -1,6 +1,7 @@
 import styled, { createGlobalStyle } from "styled-components";
 import { ReactLogo } from "styled-icons/fa-brands/ReactLogo";
 import { SearchAlt } from "styled-icons/boxicons-regular/SearchAlt";
+import { Close } from "styled-icons/evil/Close";
 
 import COLOR from "./constants/colors";
 
@@ -21,6 +22,11 @@ export const Logo = styled(ReactLogo)`
 `;
 
 export const SearchIcon = styled(SearchAlt)`
-  height: 20px;
+  height: 60px;
+  color: ${props => (props.color ? props.color : COLOR.WHITE)};
+`;
+
+export const CloseIcon = styled(Close)`
+  height: 10px;
   color: ${props => (props.color ? props.color : COLOR.WHITE)};
 `;

@@ -5,10 +5,10 @@ import COLOR from "../../constants/colors";
 const Wrapper = styled.div`
   position: fixed;
   align-items: center;
-  background-color: ${COLOR.BLUE_MARGERITE};
-  color: ${COLOR.WHITE};
+  background-color: ${COLOR.YELLOW};
+  color: ${COLOR.BLACK};
   border-radius: 25px;
-  bottom: 0px;
+  bottom: 20px;
   display: flex;
   min-height: 50px;
   max-height: 50px;
@@ -33,7 +33,6 @@ const Text = styled.p`
 
 export default ({ message }) => {
   const [hide, setHide] = useState(false);
-
   useEffect(() => {
     setTimeout(() => setHide(true), 2000);
   }, []);

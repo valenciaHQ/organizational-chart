@@ -1,21 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Wrapper, Tags, Tag, TagText, AddTagInput } from "./styled";
 import { CloseIcon } from "../../styled";
 
-const TagsInput = ({ selectedIds }) => {
+const TagsInput = ({ selectedIds, clear }) => {
   const [tags, setTags] = useState([]);
   const addTags = event => {
     if (event.key === "Enter" && event.target.value !== "") {
-      setTags([...tags, event.target.value]);
+      const newTags = [...tags, event.target.value];
       event.target.value = "";
-      selectedIds(tags);
+      setTags(newTags);
+      selectedIds(newTags);
     }
   };
 
   const removeTags = index => {
-    setTags([...tags.filter(tag => tags.indexOf(tag) !== index)]);
-    selectedIds(tags);
+    const newTags = [...tags.filter(tag => tags.indexOf(tag) !== index)];
+    setTags(newTags);
+    selectedIds(newTags);
   };
+
+  useEffect(() => {
+    setTags([]);
+  }, [clear]);
 
   return (
     <Wrapper>

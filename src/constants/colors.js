@@ -6,5 +6,6 @@ export default {
   WHITE: "#FFF",
   BLACK: "#000",
   BLUE_MARGERITE: "#7764CA",
-  LINK_WATER: "#F2F6FC"
+  LINK_WATER: "#F2F6FC",
+  YELLOW: "#FFC005"
 };

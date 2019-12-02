@@ -4,14 +4,19 @@ import COLOR from "../../constants/colors";
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 200px;
+  width: 100%;
+`;
+
+export const IconWrapper = styled.div`
+  min-width: 50px;
+  text-align: end;
 `;
 
 export const SearchBox = styled.div`
   display: flex;
   flex-direction: row;
-  width: 100%;
-  height: 50px;
+  max-width: 400px;
+  height: auto;
 `;
 
 export const Input = styled.input`
@@ -29,7 +34,7 @@ export const InputWrapper = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: auto;
   height: 100%;
 
   border-radius: 10px;
@@ -39,5 +44,10 @@ export const InputWrapper = styled.div`
 `;
 
 export const ResultBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  height: auto;
   margin-top: 20px;
+  border: 1px solid red;
 `;

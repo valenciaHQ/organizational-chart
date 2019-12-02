@@ -2,12 +2,10 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
-  flex: 1 1 auto;
-  overflow: auto;
-  flex-wrap: wrap;
-  min-height: 48px;
-  width: 480px;
+  min-height: 0;
+  width: auto;
   padding: 0 8px;
   border-radius: 6px;
 `;

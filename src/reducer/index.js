@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import levels from "./levels";
 import tooltip from "./tooltip";
-import employee from "./employee";
+import employees from "./employees";
 
-export default combineReducers({ levels, tooltip, employee });
+export default combineReducers({ levels, tooltip, employees });

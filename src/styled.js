@@ -22,8 +22,11 @@ export const Logo = styled(ReactLogo)`
 `;
 
 export const SearchIcon = styled(SearchAlt)`
-  height: 60px;
+  height: 20px;
   color: ${props => (props.color ? props.color : COLOR.WHITE)};
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 export const CloseIcon = styled(Close)`

@@ -56,7 +56,7 @@ export default ({ levelId, onAdd }) => {
           )}
           {isValidEmployees() && levelData.employees.length === 0 && (
             <Alert
-              message={`We are sorry, ${levelData.manager.first} has not employees in charge`}
+              message={`We are sorry, ${levelData.manager[0].first} has not employees in charge`}
             />
           )}
         </>

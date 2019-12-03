@@ -1,7 +1,7 @@
 import { FETCH_REQUEST, INIT_LEVEL, GET_EMPLOYEES } from "../actions/levels";
 
 const initLevel = {
-  loadingManager: true,
+  loadingManager: false,
   loadingEmployees: false,
   error: null
 };

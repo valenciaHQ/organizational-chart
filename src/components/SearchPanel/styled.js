@@ -14,9 +14,14 @@ export const IconWrapper = styled.div`
 
 export const SearchBox = styled.div`
   display: flex;
-  flex-direction: row;
-  max-width: 400px;
+  flex-direction: column;
+  max-width: 270px;
   height: auto;
+`;
+
+export const Label = styled.div`
+  font-size: 14px;
+  margin-bottom: 10px;
 `;
 
 export const Input = styled.input`
@@ -45,9 +50,14 @@ export const InputWrapper = styled.div`
 
 export const ResultBox = styled.div`
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   width: auto;
   height: auto;
   margin-top: 20px;
-  border: 1px solid red;
+`;
+
+export const EmployeeWrapper = styled.div`
+  max-width: 300px;
+  margin: 10px;
 `;

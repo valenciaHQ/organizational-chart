@@ -1,33 +1,36 @@
 import React from "react";
-import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 import Header from "./components/Header";
 import TabbedPanel from "./components/TabbedPannel";
+import Loading from "./components/Loading";
+import Alert from "./components/Alert";
 
-const Page = styled.div`
-  display: inline-flex;
-  flex-direction: column;
-  height: 100vh;
-  width: auto;
-  font-size: 1.5em;
-  margin: 0;
-`;
+import { Page, Body } from "./styled";
 
-const Body = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: auto;
-  overflow: visible;
-  height: auto;
-`;
+export default () => {
+  const loading = useSelector(
+    state =>
+      state.employees.loading ||
+      Array.from(state.levels.data.values()).some(
+        level => level.loadingManager || level.loadingEmployees
+      )
+  );
 
-const App = () => (
-  <Page>
-    <Header />
-    <Body>
-      <TabbedPanel />
-    </Body>
-  </Page>
-);
+  const error = useSelector(
+    state =>
+      state.employees.error ||
+      Array.from(state.levels.data.values()).some(level => level.error)
+  );
 
-export default App;
+  return (
+    <Page>
+      {loading && <Loading />}
+      {error && <Alert message={"We are sorry, an error occurred"} />}
+      <Header />
+      <Body>
+        <TabbedPanel />
+      </Body>
+    </Page>
+  );
+};

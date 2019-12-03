@@ -6,8 +6,7 @@ import {
   Photo,
   Information,
   Entry,
-  RightArrowWrapper,
-  DownArrowWrapper
+  RightArrowWrapper
 } from "./styled";
 
 export default ({ data, rightArrow, downArrow }) => {

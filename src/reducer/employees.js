@@ -11,7 +11,6 @@ const init = {
 };
 
 const employees = (state = init, action) => {
-  console.log("ACTION: ", action);
   switch (action.type) {
     case FETCH_EMPLOYEES_REQUEST: {
       return { ...state, loading: action.payload.loading };
@@ -20,7 +19,7 @@ const employees = (state = init, action) => {
       return { ...state, loading: action.payload.error };
     }
     case GET_EMPLOYEES_BY_ID: {
-      return { ...state, employees: action.payload.employees };
+      return { ...state, employees: action.payload.employees, loading: false };
     }
     default:
       return init;

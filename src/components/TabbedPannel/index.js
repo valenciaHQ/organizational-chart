@@ -16,7 +16,7 @@ const tabs = [
 ];
 
 export default () => {
-  const [activeTab, setActiveTab] = useState(1);
+  const [activeTab, setActiveTab] = useState(0);
   const showTab = i => setActiveTab(i);
 
   return (

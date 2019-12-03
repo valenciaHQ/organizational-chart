@@ -39,8 +39,8 @@ export const TagText = styled.span`
 export const AddTagInput = styled.input`
   flex: 1;
   border: none;
-  height: 46px;
-  width: 40px;
+  height: 80px;
+  width: 80px;
   font-size: 14px;
   padding: 4px 0 0 0;
 

@@ -1,5 +1,4 @@
 import axios from "axios";
-import qs from "qs";
 import { BASE_PATH } from "../constants/APIroutes";
 
 export const GET_EMPLOYEES_BY_ID = "GET_EMPLOYEES_BY_ID";

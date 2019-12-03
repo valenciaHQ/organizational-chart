@@ -15,6 +15,23 @@ export const GlobalStyle = createGlobalStyle`
   }
 `;
 
+export const Page = styled.div`
+  display: inline-flex;
+  flex-direction: column;
+  height: 100vh;
+  width: auto;
+  font-size: 1.5em;
+  margin: 0;
+`;
+
+export const Body = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  overflow: visible;
+  height: auto;
+`;
+
 export const Logo = styled(ReactLogo)`
   padding: 10px;
   height: 50px;
@@ -32,4 +49,7 @@ export const SearchIcon = styled(SearchAlt)`
 export const CloseIcon = styled(Close)`
   height: 10px;
   color: ${props => (props.color ? props.color : COLOR.WHITE)};
+  :hover {
+    cursor: pointer;
+  }
 `;

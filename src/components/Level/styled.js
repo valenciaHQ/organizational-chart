@@ -33,8 +33,7 @@ export const Arrow = styled.div`
   border-width: 0 3px 3px 0;
   display: inline-block;
   padding: 3px;
-
-  &:hover {
+  :hover {
     cursor: pointer;
   }
 `;

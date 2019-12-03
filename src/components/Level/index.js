@@ -22,21 +22,22 @@ export default ({ levelId, onAdd }) => {
   const isValidEmployees = () =>
     levelId !== 0 && !levelData.loadingEmployees && levelData.employees;
 
+  const isValidData = () =>
+    levelData &&
+    !levelData.loadingManager &&
+    (levelData.employees || levelData.manager);
+
   useEffect(() => {
     dispatch(initLevel(levelId));
   }, [dispatch, levelId]);
 
   return (
     <Wrapper>
-      {levelData && !levelData.loadingManager ? (
+      {isValidData() && (
         <>
           <Title>Manager level {levelId}</Title>
           <Employee
-            data={
-              levelId === 0 && levelData.employees
-                ? levelData.employees
-                : levelData.manager[0]
-            }
+            data={levelId === 0 ? levelData.employees : levelData.manager[0]}
             rightArrow={isLastLevel && <RightArrow onClick={() => onAdd()} />}
             downArrow={
               levelId !== 0 && (
@@ -60,8 +61,6 @@ export default ({ levelId, onAdd }) => {
             />
           )}
         </>
-      ) : (
-        <p>Loading</p>
       )}
     </Wrapper>
   );

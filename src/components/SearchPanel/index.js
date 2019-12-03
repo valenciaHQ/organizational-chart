@@ -8,11 +8,13 @@ import Employee from "../Employee";
 
 import { SearchIcon } from "../../styled";
 import {
+  Label,
   Wrapper,
   SearchBox,
   IconWrapper,
   InputWrapper,
-  ResultBox
+  ResultBox,
+  EmployeeWrapper
 } from "./styled";
 import COLOR from "../../constants/colors";
 
@@ -21,8 +23,7 @@ export default () => {
   const [showAlert, setShowAlert] = useState(false);
   const [clearTags, setClearTags] = useState(false);
 
-  const employeeData = useSelector(state => {
-    console.log("STATE: ", state.employees);
+  const data = useSelector(state => {
     return state.employees;
   });
   const dispatch = useDispatch();
@@ -34,8 +35,10 @@ export default () => {
     dispatch(getEmployees(ids));
   };
 
+  console.log(data);
   return (
     <Wrapper>
+      <Label>Employee id:</Label>
       <SearchBox>
         <InputWrapper>
           <TagsInput selectedIds={ids => handleSetIds(ids)} clear={clearTags} />
@@ -50,10 +53,12 @@ export default () => {
         </InputWrapper>
       </SearchBox>
       <ResultBox>
-        {employeeData.length > 0 &&
-          employeeData.map((employee, index) => {
-            return <Employee key={index} data={employee} />;
-          })}
+        {data.employees.length > 0 &&
+          data.employees.map((employee, index) => (
+            <EmployeeWrapper key={index}>
+              <Employee data={employee} />
+            </EmployeeWrapper>
+          ))}
       </ResultBox>
       {showAlert && (
         <Alert message={"You have to write an employee id first"} />
